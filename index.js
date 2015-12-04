@@ -36,14 +36,14 @@ module.exports = {
                     book.log.info.ln('compile sass file: ', filename);
 
                     // Temporary CSS file
-                    var tmpfile = type+'-'+Date.now()+'.css';
+                    var tmpfile = filename.replace(/(sass|scss)$/i, "css");
 
                     // Replace config
                     book.config.set('styles.'+type, tmpfile);
 
                     return renderSASS(
                         book.resolve(filename),
-                        path.resolve(book.options.output, tmpfile)
+                        path.resolve(tmpfile)
                     );
                 });
             }, Q());
